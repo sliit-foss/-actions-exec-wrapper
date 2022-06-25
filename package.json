@@ -1,0 +1,78 @@
+{
+  "name": "actions-exec-wrapper",
+  "version": "1.0.0",
+  "description": "A wrapper around the @actions/exec module which promisifies the console output of a command",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf ./dist && npx babel src --out-dir dist",
+    "bump-version": "yarn --cwd ./node_modules/automatic-versioning/ run bump-version --name=actions-exec-wrapper",
+    "test": "npm run cov:clean && npm run cov:unit",
+    "cov:clean": "rimraf .nyc_output; rimraf coverage; rimraf test-results",
+    "cov:unit": "jest --coverage --forceExit --colors"
+  },
+  "dependencies": {
+    "@actions/exec": "^1.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@commitlint/cli": "^17.0.1",
+    "@commitlint/config-conventional": "^17.0.0",
+    "automatic-versioning": "^1.3.0",
+    "husky": "^4.3.8",
+    "jest": "^27.5.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "HUSKY_SKIP_HOOKS=1 yarn bump-version"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "type-enum": [
+        2,
+        "always",
+        [
+          "Feat!",
+          "Feat",
+          "Fix"
+        ]
+      ],
+      "type-case": [
+        1,
+        "always",
+        "pascal-case"
+      ],
+      "subject-case": [
+        1,
+        "always",
+        "pascal-case"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sliit-foss/actions-exec-wrapper.git"
+  },
+  "keywords": [
+    "@actions/exec",
+    "actions-exec-wrapper",
+    "console-output"
+  ],
+  "author": "SLIIT FOSS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sliit-foss/actions-exec-wrapper/issues"
+  },
+  "homepage": "https://github.com/sliit-foss/actions-exec-wrapper#readme"
+}
