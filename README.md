@@ -17,7 +17,7 @@ yarn add actions-exec-wrapper
 
 ```js
 # using require
-const exec = require("actions-exec-wrapper");
+const exec = require("actions-exec-wrapper").default;
 
 # using import
 import exec from "actions-exec-wrapper";
