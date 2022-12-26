@@ -1,10 +1,9 @@
 const exec = require('@actions/exec');
 
 const execute = (command) => {
-  const args = command.split(' ')
   return new Promise((resolve, reject) => {
     let output = '';
-    exec.exec(args.shift(), args, {
+    exec.exec(command, [], {
       listeners: {
         stdout: (data) => {
           output += data.toString();
